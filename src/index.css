@@ -71,6 +71,17 @@ button:active {
   transition: 0.2s;
 }
 
+.modal {
+  position: relative;
+  top: 0;
+  min-height: 250px;
+  width: 500px;
+  border: 1px solid black;
+  margin: 50px auto;
+  padding: 25px;
+  text-align: center;
+}
+
 footer {
   background: darkgray;
   color: white;

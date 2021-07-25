@@ -1,4 +1,6 @@
+import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
+import GameSummaryModal from './GameSummaryModal';
 
 const Game = ({ gameWordArray, setIsGameStarted }) => {
   // prettier-ignore
@@ -12,7 +14,6 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
     // remove letter from unusedLettersArray
     setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
     // check letter in charArray
-    console.log(gameWordArray);
     let letterFoundInWord = false;
     const updatedWordArray = emptyWordArray.map((char, index) => {
       if (gameWordArray[index] === currentLetter) {
@@ -36,7 +37,7 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
       setIsGameStarted(false);
     }
     if (newTurnsLeft === 0) {
-      alert('You Lose :(');
+      render(<GameSummaryModal message={'You Lose :('} />);
       setIsGameStarted(false);
     }
   };
@@ -69,7 +70,11 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
       </div>
       <div className='usedLettersContainer'>
         {usedLettersArray.map((letter) => {
-          return <span className='wordBox'>{letter}</span>;
+          return (
+            <span className='wordBox' key={letter}>
+              {letter}
+            </span>
+          );
         })}
       </div>
       <div className='unusedLettersContainer'>
