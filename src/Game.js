@@ -36,6 +36,7 @@ const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal }
       setShowModal(true);
       setIsGameStarted(false);
     }
+
     if (updatedTurnsLeft === 0) {
       setModalMessage('You lose :(');
       setShowModal(true);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GameSummaryModal from './GameSummaryModal';
 import Game from './Game';
+import Leaderboard from './Leaderboard';
 
 // const wordArray = ['Bear', 'Elephant', 'Alligator', 'Wasp', 'Bumble Bee'];
 
@@ -36,6 +37,7 @@ function App() {
           <Game gameWordArray={charArray} setIsGameStarted={setIsGameStarted} setShowModal={setShowModal} setModalMessage={setModalMessage} />
         )}
         {showModal ? <GameSummaryModal message={modalMessage} setShowModal={setShowModal} /> : null}
+        <Leaderboard />
       </main>
       <footer>
         <p>
