@@ -54,6 +54,24 @@ main {
   justify-content: center;
 }
 
+.strikethrough {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  padding: 10px;
+  margin: 5px;
+}
+
+.strikethrough::before {
+  position: absolute;
+  content: '';
+  border-top: 1px solid red;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: rotate(-45deg);
+}
+
 button {
   position: relative;
   padding: 8px;

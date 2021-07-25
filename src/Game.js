@@ -1,19 +1,17 @@
-import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
-import GameSummaryModal from './GameSummaryModal';
+import WordHint from './WordHint';
 
-const Game = ({ gameWordArray, setIsGameStarted }) => {
-  // prettier-ignore
-  const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(""));
+const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal }) => {
+  const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
   const [turnsLeft, setTurnsLeft] = useState(6);
 
   const checkLetter = (e) => {
     const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
-    // remove letter from unusedLettersArray
+    // Remove letter from unusedLettersArray
     setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
-    // check letter in charArray
+    // Check letter in charArray and return wordArray to include found letter in place of underscores
     let letterFoundInWord = false;
     const updatedWordArray = emptyWordArray.map((char, index) => {
       if (gameWordArray[index] === currentLetter) {
@@ -23,21 +21,24 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
         return char;
       }
     });
-    // decrememnt turnsLeft if letter was incorrect
-    const newTurnsLeft = turnsLeft - 1;
+
+    // Decrement turnsLeft if letter was incorrect
+    const updatedTurnsLeft = turnsLeft - 1;
     if (!letterFoundInWord) {
-      setTurnsLeft(newTurnsLeft);
-      // add letter to usedLettersArray
+      setTurnsLeft(updatedTurnsLeft);
+      // Add letter to usedLettersArray
       setUsedLettersArray([...usedLettersArray, currentLetter]);
     }
 
     setEmptyWordArray(updatedWordArray);
     if (gameWordArray.join('') === updatedWordArray.join('')) {
-      alert('You win!');
+      setModalMessage('You win! :)');
+      setShowModal(true);
       setIsGameStarted(false);
     }
-    if (newTurnsLeft === 0) {
-      render(<GameSummaryModal message={'You Lose :('} />);
+    if (updatedTurnsLeft === 0) {
+      setModalMessage('You lose :(');
+      setShowModal(true);
       setIsGameStarted(false);
     }
   };
@@ -59,6 +60,7 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
   return (
     <section className='gameContainer'>
       <h2>Tries Left: {turnsLeft}</h2>
+      <WordHint word={gameWordArray.join('')} />
       <div className='container'>
         {emptyWordArray.map((char, index) => {
           return (
@@ -71,7 +73,7 @@ const Game = ({ gameWordArray, setIsGameStarted }) => {
       <div className='usedLettersContainer'>
         {usedLettersArray.map((letter) => {
           return (
-            <span className='wordBox' key={letter}>
+            <span className='strikethrough' key={letter}>
               {letter}
             </span>
           );

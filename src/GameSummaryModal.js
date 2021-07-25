@@ -1,6 +1,6 @@
-const GameSummaryModal = ({ message }) => {
+const GameSummaryModal = ({ message, setShowModal }) => {
   const handleClick = () => {
-    console.log('close clicked');
+    setShowModal(false);
   };
 
   return (
