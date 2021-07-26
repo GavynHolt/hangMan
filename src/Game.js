@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import WordHint from './WordHint';
 
 const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal, definition }) => {
