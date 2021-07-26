@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const WordHint = ({ word }) => {
   const [definition, setDefinition] = useState('');
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     const apiKey = `27f927fa-fa4e-47c0-b6a8-a83eb72c66aa`;
@@ -19,9 +20,14 @@ const WordHint = ({ word }) => {
   }, [word]);
 
   return (
-    <div>
-      <h2>Hint: </h2>
-      <p>{definition}</p>
+    <div className='hintBox'>
+      {!showHint ? (
+        <button onClick={() => setShowHint(true)}>Show Hint</button>
+      ) : (
+        <p>
+          <span className='bold'>Hint:</span> {definition}
+        </p>
+      )}
     </div>
   );
 };

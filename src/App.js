@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import Header from './Header';
 import GameSummaryModal from './GameSummaryModal';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
+import Footer from './Footer';
 
 // const wordArray = ['Bear', 'Elephant', 'Alligator', 'Wasp', 'Bumble Bee'];
 
@@ -27,9 +29,7 @@ function App() {
 
   return (
     <div className='wrapper'>
-      <header>
-        <h1>Hang Man</h1>
-      </header>
+      <Header />
       <main>
         {!isGameStarted ? (
           <button onClick={startGame}>Start Game</button>
@@ -39,11 +39,7 @@ function App() {
         {showModal ? <GameSummaryModal message={modalMessage} setShowModal={setShowModal} /> : null}
         <Leaderboard />
       </main>
-      <footer>
-        <p>
-          Created at <a href='https://www.junocollege.com'>Juno College</a>
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

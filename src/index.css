@@ -20,6 +20,14 @@ main {
   align-items: center;
 }
 
+.hintBox {
+  min-height: 4rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 .container {
   padding: 10px;
   max-width: 600px;
@@ -92,12 +100,19 @@ button:active {
 .modal {
   position: relative;
   top: 0;
-  min-height: 250px;
   width: 500px;
   border: 1px solid black;
   margin: 50px auto;
   padding: 25px;
   text-align: center;
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  min-width: 100px;
 }
 
 footer {
