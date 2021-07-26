@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import WordHint from './WordHint';
 
-const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal }) => {
+const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal, definition }) => {
   const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
@@ -61,7 +61,7 @@ const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal }
   return (
     <section className='gameContainer'>
       <h2>Tries Left: {turnsLeft}</h2>
-      <WordHint word={gameWordArray.join('')} />
+      <WordHint word={gameWordArray.join('')} definition={definition} />
       <div className='container'>
         {emptyWordArray.map((char, index) => {
           return (
