@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import firebase from './firebaseConfig.js';
 
 const Leaderboard = () => {
@@ -22,13 +23,13 @@ const Leaderboard = () => {
     });
   }, []);
   return (
-    <div>
+    <div className='leaderboard'>
       <h2>Leaderboard</h2>
       <table>
         <thead>
           <tr>
             <th>Username</th>
-            <th>Score</th>
+            <th className='centered'>Score</th>
           </tr>
         </thead>
         <tbody>
@@ -36,12 +37,15 @@ const Leaderboard = () => {
             return (
               <tr key={user.key}>
                 <td>{user.username}</td>
-                <td>{user.score}</td>
+                <td className='centered'>{user.score}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <Link className='buttonLink' to='/'>
+        To Home
+      </Link>
     </div>
   );
 };
