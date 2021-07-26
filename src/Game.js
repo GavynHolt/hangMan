@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import WordHint from './WordHint';
+import GameSummaryModal from './GameSummaryModal';
 
-const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal, definition }) => {
+const Game = ({ gameWordArray, setIsGameStarted, definition }) => {
   const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
   const [turnsLeft, setTurnsLeft] = useState(6);
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const checkLetter = (e) => {
     const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
@@ -34,13 +37,11 @@ const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal, 
     if (gameWordArray.join('') === updatedWordArray.join('')) {
       setModalMessage('You win! :)');
       setShowModal(true);
-      setIsGameStarted(false);
     }
 
     if (updatedTurnsLeft === 0) {
       setModalMessage('You lose :(');
       setShowModal(true);
-      setIsGameStarted(false);
     }
   };
 
@@ -89,6 +90,7 @@ const Game = ({ gameWordArray, setIsGameStarted, setModalMessage, setShowModal, 
           );
         })}
       </div>
+      {showModal ? <GameSummaryModal setIsGameStarted={setIsGameStarted} message={modalMessage} setShowModal={setShowModal} /> : null}
     </section>
   );
 };

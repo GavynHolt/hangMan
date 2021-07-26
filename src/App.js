@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './Header';
-import GameSummaryModal from './GameSummaryModal';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 import Footer from './Footer';
-
-// const wordArray = ['Bear', 'Elephant', 'Alligator', 'Wasp', 'Bumble Bee'];
 
 function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const startGame = async () => {
     setIsGameStarted(true);
@@ -93,20 +88,7 @@ function App() {
               </div>
             )}
           />
-          <Route
-            exact
-            path='/game'
-            render={() => (
-              <Game
-                gameWordArray={charArray}
-                setIsGameStarted={setIsGameStarted}
-                setShowModal={setShowModal}
-                setModalMessage={setModalMessage}
-                definition={definition}
-              />
-            )}
-          />
-          {showModal ? <GameSummaryModal message={modalMessage} setShowModal={setShowModal} /> : null}
+          <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameStarted={setIsGameStarted} definition={definition} />} />
           <Route exact path='/leaderboard' component={Leaderboard} />
         </main>
         <Footer />

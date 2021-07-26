@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
-const GameSummaryModal = ({ message, setShowModal }) => {
+const GameSummaryModal = ({ message, setShowModal, setIsGameStarted }) => {
   const handleClose = () => {
+    setIsGameStarted(false);
     setShowModal(false);
   };
 
