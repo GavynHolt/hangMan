@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import firebase from './firebaseConfig.js';
 import Header from './Header';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
@@ -8,15 +9,16 @@ import Footer from './Footer';
 function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameRunning, setIsGameRunning] = useState(false);
 
   const startGame = async () => {
-    setIsGameStarted(true);
+    setIsGameRunning(true);
   };
 
+  // If game is not running, generate a new word and word hint(definition)
   useEffect(() => {
     // if game is not yet started or previous game has been stopped, fetch new data
-    if (!isGameStarted) {
+    if (!isGameRunning) {
       // Get a random word from random-word-api
       const randomWordUrl = new URL(`https://random-word-api.herokuapp.com/word`);
       randomWordUrl.search = new URLSearchParams({
@@ -62,7 +64,28 @@ function App() {
       };
       fetchData(0);
     }
-  }, [isGameStarted]);
+  }, [isGameRunning]);
+
+  // Load the leaderboard database
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (snapshot) => {
+      const myData = snapshot.val();
+
+      const newArray = [];
+      for (let dataKey in myData) {
+        const userObject = {
+          key: dataKey,
+          username: myData[dataKey].username,
+          score: myData[dataKey].score,
+        };
+        newArray.push(userObject);
+      }
+      setUserList(newArray);
+    });
+  }, []);
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -88,9 +111,10 @@ function App() {
               </div>
             )}
           />
-          <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameStarted={setIsGameStarted} definition={definition} />} />
-          <Route exact path='/leaderboard' component={Leaderboard} />
+          <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
+          <Route exact path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
         </main>
+
         <Footer />
       </div>
     </Router>

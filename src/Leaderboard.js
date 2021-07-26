@@ -1,27 +1,6 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import firebase from './firebaseConfig.js';
 
-const Leaderboard = () => {
-  const [userList, setUserList] = useState([]);
-
-  useEffect(() => {
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', (snapshot) => {
-      const myData = snapshot.val();
-
-      const newArray = [];
-      for (let dataKey in myData) {
-        const userObject = {
-          key: dataKey,
-          username: myData[dataKey].username,
-          score: myData[dataKey].score,
-        };
-        newArray.push(userObject);
-      }
-      setUserList(newArray);
-    });
-  }, []);
+const Leaderboard = ({ userList }) => {
   return (
     <div className='leaderboard'>
       <h2>Leaderboard</h2>

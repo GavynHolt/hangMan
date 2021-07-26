@@ -2,7 +2,7 @@ import { useState } from 'react';
 import WordHint from './WordHint';
 import GameSummaryModal from './GameSummaryModal';
 
-const Game = ({ gameWordArray, setIsGameStarted, definition }) => {
+const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
@@ -90,7 +90,7 @@ const Game = ({ gameWordArray, setIsGameStarted, definition }) => {
           );
         })}
       </div>
-      {showModal ? <GameSummaryModal setIsGameStarted={setIsGameStarted} message={modalMessage} setShowModal={setShowModal} /> : null}
+      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} message={modalMessage} setShowModal={setShowModal} /> : null}
     </section>
   );
 };
