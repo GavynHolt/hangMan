@@ -70,7 +70,7 @@ function App() {
   }, [isGameStarted]);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className='wrapper'>
         <Header />
         <main>
