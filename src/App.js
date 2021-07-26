@@ -22,7 +22,7 @@ function App() {
     // if game is not yet started or previous game has been stopped, fetch new data
     if (!isGameStarted) {
       // Get a random word from random-word-api
-      const randomWordUrl = new URL(`http://random-word-api.herokuapp.com/word`);
+      const randomWordUrl = new URL(`https://random-word-api.herokuapp.com/word`);
       randomWordUrl.search = new URLSearchParams({
         swear: 1,
         number: 1,
