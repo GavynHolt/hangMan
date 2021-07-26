@@ -4,7 +4,7 @@
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 600px;
   width: 90%;
   margin: 0 auto;
 }
@@ -14,14 +14,31 @@ h1 {
   margin: 1rem 0;
 }
 
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+a,
+a:visited,
+a:active {
+  color: black;
+}
+
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.gameDescription {
+  text-align: center;
+}
+
 .hintBox {
   min-height: 4rem;
+  display: flex;
+  align-items: center;
 }
 
 .bold {
@@ -30,7 +47,7 @@ main {
 
 .container {
   padding: 10px;
-  max-width: 600px;
+  max-width: 500px;
   margin: 20px 0;
   display: flex;
   justify-content: center;
@@ -80,6 +97,7 @@ main {
   transform: rotate(-45deg);
 }
 
+.buttonLink,
 button {
   position: relative;
   padding: 8px;
@@ -87,9 +105,9 @@ button {
   background-color: rgb(77, 229, 240);
   border: 1px solid black;
   box-shadow: 1px 1px darkgray;
-  /* color: white; */
 }
 
+.buttonLink:active,
 button:active {
   box-shadow: none;
   top: 1px;
@@ -97,18 +115,41 @@ button:active {
   transition: 0.2s;
 }
 
+.modalRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(36, 36, 36, 0.7);
+}
+
 .modal {
-  position: relative;
-  top: 0;
+  position: absolute;
+  background-color: cornflowerblue;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 20%;
   width: 500px;
   border: 1px solid black;
-  margin: 50px auto;
   padding: 25px;
   text-align: center;
 }
 
+.leaderboard {
+  margin: 3vw 0;
+  padding: 20px;
+}
+
+.leaderboard h2 {
+  text-align: center;
+}
 th {
   text-align: left;
+  text-decoration: underline;
+  line-height: 2.5rem;
+}
+
+.centered {
+  text-align: center;
 }
 
 td {
@@ -126,7 +167,7 @@ footer {
   padding: 10px 0;
 }
 
-footer a {
-  text-decoration: none;
+.junoLink,
+.junoLink:visited {
   color: #ea593e;
 }
