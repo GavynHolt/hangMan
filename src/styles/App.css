@@ -269,11 +269,12 @@ body {
 h1 {
   text-align: center;
   font-size: 4rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 h2 {
   font-size: 2.5rem;
+  margin: 1rem 0;
 }
 
 a {
@@ -353,6 +354,7 @@ main {
 }
 
 .dashboard {
+  font-size: 1.5rem;
   -ms-flex-item-align: stretch;
       align-self: stretch;
   display: -webkit-box;
@@ -454,7 +456,7 @@ button:active {
 }
 
 .leaderboard {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 .leaderboard p,
 .leaderboard h2 {
@@ -467,7 +469,7 @@ table {
   border: 3px solid white;
   border-radius: 10px;
   padding: 15px;
-  margin: 15px;
+  margin: 15px 0;
 }
 
 table th,
