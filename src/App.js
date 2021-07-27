@@ -92,32 +92,30 @@ function App() {
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <div className='wrapper'>
-        <Header />
-        <main>
-          <Route
-            exact
-            path='/'
-            render={() => (
-              <div className='gameDescription'>
-                <h2>A Word Guessing Game</h2>
-                <p>
-                  Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press start
-                  below!
-                </p>
-                <Link className='buttonLink' to='/game' onClick={startGame}>
-                  Start Game
-                </Link>
-                <Link className='buttonLink' to='/leaderboard'>
-                  Leaderboard
-                </Link>
-              </div>
-            )}
-          />
-          <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
-          <Route exact path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
-        </main>
-      </div>
+      <Header />
+      <main className='wrapper'>
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <div className='gameDescription'>
+              <h2>A Word Guessing Game</h2>
+              <p>
+                Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press start below!
+              </p>
+              <Link className='buttonLink' to='/game' onClick={startGame}>
+                Start Game
+              </Link>
+              <Link className='buttonLink' to='/leaderboard'>
+                Leaderboard
+              </Link>
+            </div>
+          )}
+        />
+        <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
+        <Route exact path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
+      </main>
+
       <Footer />
     </Router>
   );

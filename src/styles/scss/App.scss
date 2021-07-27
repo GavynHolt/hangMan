@@ -4,11 +4,6 @@
 @import 'setup';
 @import 'variables';
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   background-color: $backgroundColor;
   font-family: $fontSansSerif;
@@ -32,7 +27,12 @@ body {
 
 h1 {
   text-align: center;
-  margin: 1rem 0;
+  font-size: 4rem;
+  margin: 2rem 0;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 a {
@@ -165,8 +165,7 @@ button:active {
 }
 
 .leaderboard {
-  margin: 3vw 0;
-  padding: 20px;
+  margin: 20px 0;
   p,
   h2 {
     text-align: center;

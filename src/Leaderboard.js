@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Leaderboard = ({ userList }) => {
   const [indexOffset, setIndexOffset] = useState(0);
@@ -38,8 +40,12 @@ const Leaderboard = ({ userList }) => {
         </tbody>
       </table>
       <div className='pageTurnBox'>
-        <button onClick={() => changeLeaderboardPage(-10)}>Prev.</button>
-        <button onClick={() => changeLeaderboardPage(10)}>Next</button>
+        <button onClick={() => changeLeaderboardPage(-10)}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <button onClick={() => changeLeaderboardPage(10)}>
+          <FontAwesomeIcon icon={faArrowRight} />
+        </button>
       </div>
       <Link className='buttonLink' to='/'>
         To Home
