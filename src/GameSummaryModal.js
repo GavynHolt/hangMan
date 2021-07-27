@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import firebase from './firebaseConfig.js';
 
-const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score }) => {
+const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, word }) => {
   const [userInput, setUserInput] = useState('');
   const [showForm, setShowForm] = useState(true);
 
@@ -11,9 +11,8 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score }) =
     setShowModal(false);
   };
 
-  const today = new Date().toDateString().split(' ');
-  const myDate = `${today[1]} ${today[2]}, ${today[3]}`;
-  console.log(myDate);
+  const todayArray = new Date().toDateString().split(' ');
+  const myDate = `${todayArray[1]} ${todayArray[2]}, ${todayArray[3]}`;
 
   const addToLeaderboard = (e) => {
     e.preventDefault();
@@ -22,6 +21,7 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score }) =
       username: userInput,
       score: score,
       date: myDate,
+      word: word,
     });
     setShowForm(false);
   };
@@ -30,9 +30,12 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score }) =
     <div className='modalRoot'>
       <div className='modal'>
         <h2>{isWinner ? 'Congratulations! You did it!' : 'Thanks for playing! Please try again.'}</h2>
+        <p>Your game word was: </p>
+        <p className='featureText'>{word}</p>
         {isWinner && showForm ? (
           <div>
-            <p>Your finished with a score of {score}</p>
+            <p>Your finished with a score of:</p>
+            <p className='featureText'>{score}</p>
             <form className='leaderboardForm' onSubmit={addToLeaderboard}>
               <label htmlFor='leaderboardName'>Enter your name for the leaderboard:</label>
               <input type='text' id='leaderboardName' value={userInput} onChange={(e) => setUserInput(e.target.value)} />

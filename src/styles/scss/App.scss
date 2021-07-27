@@ -32,7 +32,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 a {
@@ -89,6 +89,12 @@ main {
   align-items: center;
 }
 
+.dashboard {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
 .usedLettersContainer {
   min-height: 100px;
   max-width: 400px;
@@ -97,6 +103,7 @@ main {
 
 .unusedLettersContainer {
   max-width: 600px;
+  margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -113,11 +120,11 @@ main {
 .strikethrough::before {
   position: absolute;
   content: '';
-  border-top: 1px solid red;
+  border-top: 3px solid red;
   top: 50%;
   left: 0;
   right: 0;
-  transform: rotate(-45deg);
+  transform: rotate(-10deg);
 }
 
 .buttonLink,
@@ -127,7 +134,7 @@ button {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  background-color: rgb(61, 133, 136);
+  background-color: $buttonLinkColor;
   border: 3px solid rgb(3, 61, 63);
   box-shadow: 1px 1px rgb(3, 61, 63);
 }
@@ -144,12 +151,12 @@ button:active {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background-color: rgba(36, 36, 36, 0.7);
+  background-color: $modalRootColor;
 }
 
 .modal {
   position: absolute;
-  background-color: cornflowerblue;
+  background-color: $modalColor;
   transform: translateX(-50%);
   left: 50%;
   top: 20%;
@@ -158,6 +165,10 @@ button:active {
   border: 1px solid black;
   padding: 25px;
   text-align: center;
+  .featureText {
+    font-weight: 700;
+    font-size: 2rem;
+  }
 }
 
 .leaderboardForm input {
@@ -193,9 +204,13 @@ table {
     line-height: 2.5rem;
   }
 
-  .score {
-    min-width: 75px;
-    text-align: right;
+  .username {
+    min-width: 150px;
+  }
+
+  .word {
+    min-width: 100px;
+    text-align: center;
   }
 
   .date {
@@ -203,8 +218,9 @@ table {
     text-align: right;
   }
 
-  .username {
-    min-width: 200px;
+  .score {
+    min-width: 75px;
+    text-align: right;
   }
 }
 
@@ -219,10 +235,13 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
+  p {
+    margin: 0;
+  }
 }
 
 .junoLink,
 .junoLink:visited {
   display: inline;
-  color: #ea593e;
+  color: $junoColor;
 }

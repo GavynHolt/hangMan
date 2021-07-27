@@ -273,7 +273,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 a {
@@ -352,6 +352,17 @@ main {
           align-items: center;
 }
 
+.dashboard {
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .usedLettersContainer {
   min-height: 100px;
   max-width: 400px;
@@ -360,6 +371,7 @@ main {
 
 .unusedLettersContainer {
   max-width: 600px;
+  margin: 20px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -381,12 +393,12 @@ main {
 .strikethrough::before {
   position: absolute;
   content: "";
-  border-top: 1px solid red;
+  border-top: 3px solid red;
   top: 50%;
   left: 0;
   right: 0;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
 }
 
 .buttonLink,
@@ -432,6 +444,10 @@ button:active {
   padding: 25px;
   text-align: center;
 }
+.modal .featureText {
+  font-weight: 700;
+  font-size: 2rem;
+}
 
 .leaderboardForm input {
   line-height: 1.5rem;
@@ -463,16 +479,20 @@ table th {
   text-decoration: underline;
   line-height: 2.5rem;
 }
-table .score {
-  min-width: 75px;
-  text-align: right;
+table .username {
+  min-width: 150px;
+}
+table .word {
+  min-width: 100px;
+  text-align: center;
 }
 table .date {
   min-width: 100px;
   text-align: right;
 }
-table .username {
-  min-width: 200px;
+table .score {
+  min-width: 75px;
+  text-align: right;
 }
 
 .pageTurnBox {
@@ -490,6 +510,9 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
+}
+footer p {
+  margin: 0;
 }
 
 .junoLink,

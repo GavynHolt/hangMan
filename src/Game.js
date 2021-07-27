@@ -77,8 +77,14 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
 
   return (
     <section className='gameContainer'>
-      <h2>Tries Left: {turnsLeft}</h2>
-      <p>Score: {score}</p>
+      <div className='dashboard'>
+        <div>
+          <p>Tries Left: {turnsLeft}</p>
+        </div>
+        <div>
+          <p>Score: {score}</p>
+        </div>
+      </div>
       <WordHint definition={definition} showHint={showHint} setShowHint={setShowHint} />
       <div className='container'>
         {emptyWordArray.map((char, index) => {
@@ -107,7 +113,9 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
           );
         })}
       </div>
-      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} score={score} /> : null}
+      {showModal ? (
+        <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} score={score} word={gameWordArray.join('')} />
+      ) : null}
     </section>
   );
 };

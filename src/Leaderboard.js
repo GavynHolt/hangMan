@@ -21,6 +21,7 @@ const Leaderboard = ({ userList }) => {
         <thead>
           <tr>
             <th className='username'>Username</th>
+            <th className='word'>Word</th>
             <th className='date'>Date</th>
             <th className='score'>Score</th>
           </tr>
@@ -32,6 +33,7 @@ const Leaderboard = ({ userList }) => {
                 <td className='username'>
                   {indexOffset + index + 1}. {user.username}
                 </td>
+                <td className='word'>{user.word}</td>
                 <td className='date'>{user.date}</td>
                 <td className='score'>{user.score}</td>
               </tr>
