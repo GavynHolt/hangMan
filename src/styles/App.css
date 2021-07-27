@@ -239,7 +239,6 @@ html {
 body {
   background-color: #303e52;
   font-family: "Lexend", sans-serif;
-  font-weight: 300;
   color: white;
 }
 
@@ -269,11 +268,12 @@ body {
 h1 {
   text-align: center;
   font-size: 4rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 h2 {
   font-size: 2.5rem;
+  margin: 1rem 0;
 }
 
 a {
@@ -306,6 +306,7 @@ main {
 
 .hintBox {
   min-height: 4rem;
+  font-size: 1.15rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -328,6 +329,8 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .wordBox {
@@ -353,6 +356,7 @@ main {
 }
 
 .dashboard {
+  font-size: 1.5rem;
   -ms-flex-item-align: stretch;
       align-self: stretch;
   display: -webkit-box;
@@ -364,7 +368,7 @@ main {
 }
 
 .usedLettersContainer {
-  min-height: 100px;
+  min-height: 70px;
   max-width: 400px;
   margin: 0 auto;
 }
@@ -397,8 +401,8 @@ main {
   top: 50%;
   left: 0;
   right: 0;
-  -webkit-transform: rotate(-10deg);
-          transform: rotate(-10deg);
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 .buttonLink,
@@ -406,12 +410,13 @@ button {
   position: relative;
   color: white;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   border-radius: 5px;
-  background-color: #3d8588;
-  border: 3px solid #033d3f;
-  -webkit-box-shadow: 1px 1px #033d3f;
-          box-shadow: 1px 1px #033d3f;
+  font-size: 1.25rem;
+  background-color: #3f9194;
+  border: 3px solid #222c3a;
+  -webkit-box-shadow: 1px 1px #222c3a;
+          box-shadow: 1px 1px #222c3a;
 }
 
 .buttonLink:active,
@@ -424,24 +429,33 @@ button:active {
   transition: 0.2s;
 }
 
+.buttonLink:hover,
+button:hover {
+  background-color: #609696;
+}
+
+.keyboardLetter {
+  margin: 5px;
+}
+
 .modalRoot {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background-color: rgba(36, 36, 36, 0.7);
+  background-color: #242424b3;
 }
 
 .modal {
-  position: absolute;
-  background-color: cornflowerblue;
+  position: relative;
+  background-color: #44639c;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  left: 50%;
-  top: 20%;
-  max-width: 500px;
+  left: calc(50% - 20px);
+  top: 5vw;
+  max-width: 480px;
   margin: 20px;
   border: 1px solid black;
-  padding: 25px;
+  padding: 25px 0;
   text-align: center;
 }
 .modal .featureText {
@@ -449,12 +463,38 @@ button:active {
   font-size: 2rem;
 }
 
+.leaderboardForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 40px;
+}
+.leaderboardForm label {
+  text-align: center;
+}
 .leaderboardForm input {
-  line-height: 1.5rem;
+  line-height: 2.5rem;
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+.leaderboardForm button {
+  margin: 10px 0;
+}
+
+.formConfirmation {
+  margin: 20px;
+}
+.formConfirmation span {
+  font-weight: 400;
+  font-size: 1.25rem;
 }
 
 .leaderboard {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 .leaderboard p,
 .leaderboard h2 {
@@ -463,11 +503,13 @@ button:active {
 
 table {
   display: table;
+  font-weight: 300;
   height: 250px;
+  width: 100%;
   border: 3px solid white;
   border-radius: 10px;
   padding: 15px;
-  margin: 15px;
+  margin: 15px 0;
 }
 
 table th,
@@ -479,19 +521,11 @@ table th {
   text-decoration: underline;
   line-height: 2.5rem;
 }
-table .username {
-  min-width: 150px;
-}
 table .word {
-  min-width: 100px;
+  word-break: break-all;
   text-align: center;
 }
-table .date {
-  min-width: 100px;
-  text-align: right;
-}
 table .score {
-  min-width: 75px;
   text-align: right;
 }
 
@@ -505,11 +539,12 @@ table .score {
 }
 
 footer {
-  background: darkgray;
+  background: #3f3f3f;
   color: white;
   text-align: center;
   padding: 10px 0;
   width: 100%;
+  border-top: 3px solid #222c3a;
 }
 footer p {
   margin: 0;
@@ -518,5 +553,24 @@ footer p {
 .junoLink,
 .junoLink:visited {
   display: inline;
+  font-weight: 400;
   color: #ea593e;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: calc(2rem + 6vw);
+  }
+
+  h2 {
+    font-size: calc(1rem + 5vw);
+  }
+
+  .modal {
+    top: 0;
+  }
 }

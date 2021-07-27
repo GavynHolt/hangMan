@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const Leaderboard = ({ userList }) => {
   const [indexOffset, setIndexOffset] = useState(0);
@@ -22,7 +22,6 @@ const Leaderboard = ({ userList }) => {
           <tr>
             <th className='username'>Username</th>
             <th className='word'>Word</th>
-            <th className='date'>Date</th>
             <th className='score'>Score</th>
           </tr>
         </thead>
@@ -34,7 +33,6 @@ const Leaderboard = ({ userList }) => {
                   {indexOffset + index + 1}. {user.username}
                 </td>
                 <td className='word'>{user.word}</td>
-                <td className='date'>{user.date}</td>
                 <td className='score'>{user.score}</td>
               </tr>
             );
@@ -50,7 +48,7 @@ const Leaderboard = ({ userList }) => {
         </button>
       </div>
       <Link className='buttonLink' to='/'>
-        To Home
+        <FontAwesomeIcon icon={faArrowLeft} /> <FontAwesomeIcon icon={faHome} />
       </Link>
     </div>
   );

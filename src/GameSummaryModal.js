@@ -29,7 +29,7 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
   return (
     <div className='modalRoot'>
       <div className='modal'>
-        <h2>{isWinner ? 'Congratulations! You did it!' : 'Thanks for playing! Please try again.'}</h2>
+        <h2>{isWinner ? 'You did it!' : 'Thanks for playing! Please try again.'}</h2>
         <p>Your game word was: </p>
         <p className='featureText'>{word}</p>
         {isWinner && showForm ? (
@@ -38,18 +38,29 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
             <p className='featureText'>{score}</p>
             <form className='leaderboardForm' onSubmit={addToLeaderboard}>
               <label htmlFor='leaderboardName'>Enter your name for the leaderboard:</label>
-              <input type='text' id='leaderboardName' value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+              <input
+                type='text'
+                id='leaderboardName'
+                placeholder='Name (8 chars max)'
+                maxLength='8'
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+              />
               <button type='submit'>Submit</button>
             </form>
           </div>
         ) : isWinner ? (
-          <p>
-            Thank you! Your entry of username: {userInput}, score: {score} has been added to the leaderboard.
-          </p>
+          <div className='formConfirmation'>
+            <p>Thank you! Your entry of </p>
+            <p>
+              Name: <span>{userInput}</span> <br />
+              Score: <span>{score}</span>
+            </p>{' '}
+            <p> has been added to the leaderboard.</p>
+          </div>
         ) : null}
-        <p>Be sure to check out the leaderboard!</p>
         <Link to='/leaderboard' className='buttonLink' onClick={handleClose}>
-          Close
+          To Leaderboard
         </Link>
       </div>
     </div>
