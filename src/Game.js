@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import WordHint from './WordHint';
 import GameSummaryModal from './GameSummaryModal';
 
@@ -10,6 +10,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [isWinner, setIsWinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [score, setScore] = useState(0);
+  const [showHint, setShowHint] = useState(false);
 
   const checkLetter = (e) => {
     const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
@@ -36,7 +37,6 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
 
     setEmptyWordArray(updatedWordArray);
     if (gameWordArray.join('') === updatedWordArray.join('')) {
-      setScore(1000); // set to 1000 for testing
       setIsWinner(true);
       setShowModal(true);
     }
@@ -46,6 +46,13 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       setShowModal(true);
     }
   };
+
+  useEffect(() => {
+    // multiply word length by turns left, minus 200 points for using word hint.
+    const baseScore = gameWordArray.length * turnsLeft * 100;
+    const wordHintPenalty = showHint ? 200 : 0;
+    setScore(baseScore - wordHintPenalty);
+  }, [gameWordArray.length, showHint, turnsLeft]);
 
   // const checkKeyDown = (e) => {
   //   if (/^[a-z]$/i.test(e.key)) {
@@ -64,7 +71,8 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   return (
     <section className='gameContainer'>
       <h2>Tries Left: {turnsLeft}</h2>
-      <WordHint word={gameWordArray.join('')} definition={definition} />
+      <p>Score: {score}</p>
+      <WordHint definition={definition} showHint={showHint} setShowHint={setShowHint} />
       <div className='container'>
         {emptyWordArray.map((char, index) => {
           return (

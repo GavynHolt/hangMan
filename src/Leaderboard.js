@@ -1,6 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Leaderboard = ({ userList }) => {
+  const [indexOffset, setIndexOffset] = useState(0);
+
+  const changeLeaderboardPage = (offset) => {
+    setIndexOffset(indexOffset + offset);
+  };
+
   return (
     <div className='leaderboard'>
       <h2>Leaderboard</h2>
@@ -12,16 +19,22 @@ const Leaderboard = ({ userList }) => {
           </tr>
         </thead>
         <tbody>
-          {userList.map((user) => {
+          {userList.slice(indexOffset, indexOffset + 10).map((user, index) => {
             return (
               <tr key={user.key}>
-                <td className='username'>{user.username}</td>
+                <td className='username'>
+                  {indexOffset + index + 1}. {user.username}
+                </td>
                 <td className='score'>{user.score}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <div className='pageTurnBox'>
+        <button onClick={() => changeLeaderboardPage(-10)}>Prev.</button>
+        <button onClick={() => changeLeaderboardPage(10)}>Next</button>
+      </div>
       <Link className='buttonLink' to='/'>
         To Home
       </Link>
