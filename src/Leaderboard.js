@@ -5,12 +5,16 @@ const Leaderboard = ({ userList }) => {
   const [indexOffset, setIndexOffset] = useState(0);
 
   const changeLeaderboardPage = (offset) => {
-    setIndexOffset(indexOffset + offset);
+    const newIndexOffset = indexOffset + offset;
+    if (newIndexOffset >= 0 && newIndexOffset < userList.length) {
+      setIndexOffset(newIndexOffset);
+    }
   };
 
   return (
     <div className='leaderboard'>
       <h2>Leaderboard</h2>
+      <p>{userList.length} Entries</p>
       <table>
         <thead>
           <tr>
