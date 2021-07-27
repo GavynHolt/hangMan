@@ -11,12 +11,17 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score }) =
     setShowModal(false);
   };
 
+  const today = new Date().toDateString().split(' ');
+  const myDate = `${today[1]} ${today[2]}, ${today[3]}`;
+  console.log(myDate);
+
   const addToLeaderboard = (e) => {
     e.preventDefault();
     const dbRef = firebase.database().ref();
     dbRef.push({
       username: userInput,
       score: score,
+      date: myDate,
     });
     setShowForm(false);
   };

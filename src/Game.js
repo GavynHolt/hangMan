@@ -52,8 +52,15 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
     const baseScore = gameWordArray.length * turnsLeft * 100;
     const wordHintPenalty = showHint ? 200 : 0;
     setScore(baseScore - wordHintPenalty);
-  }, [gameWordArray.length, showHint, turnsLeft]);
 
+    // when component is closed via back button press, setIsGameRunning to false
+    return () => {
+      window.onpopstate = () => {
+        console.log('back button pressed');
+        setIsGameRunning(false);
+      };
+    };
+  }, [gameWordArray.length, showHint, turnsLeft, setIsGameRunning]);
   // const checkKeyDown = (e) => {
   //   if (/^[a-z]$/i.test(e.key)) {
   //     checkLetter(e);

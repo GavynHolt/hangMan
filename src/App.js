@@ -80,6 +80,7 @@ function App() {
           key: dataKey,
           username: myData[dataKey].username,
           score: myData[dataKey].score,
+          date: myData[dataKey].date,
         };
         newArray.push(userObject);
       }
@@ -116,9 +117,8 @@ function App() {
           <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
           <Route exact path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
         </main>
-
-        <Footer />
       </div>
+      <Footer />
     </Router>
   );
 }
