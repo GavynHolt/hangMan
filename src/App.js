@@ -80,7 +80,6 @@ function App() {
           key: dataKey,
           username: myData[dataKey].username,
           score: myData[dataKey].score,
-          date: myData[dataKey].date,
           word: myData[dataKey].word,
         };
         newArray.push(userObject);

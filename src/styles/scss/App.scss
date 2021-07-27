@@ -7,7 +7,7 @@
 body {
   background-color: $backgroundColor;
   font-family: $fontSansSerif;
-  font-weight: 300;
+  // font-weight: 300;
   color: white;
 }
 
@@ -128,7 +128,7 @@ main {
   top: 50%;
   left: 0;
   right: 0;
-  transform: rotate(-10deg);
+  transform: rotate(-45deg);
 }
 
 .buttonLink,
@@ -140,8 +140,8 @@ button {
   border-radius: 5px;
   font-size: 1.25rem;
   background-color: $buttonLinkColor;
-  border: 3px solid rgb(3, 61, 63);
-  box-shadow: 1px 1px rgb(3, 61, 63);
+  border: 3px solid $buttonLinkBorderColor;
+  box-shadow: 1px 1px $buttonLinkBorderColor;
 }
 
 .buttonLink:active,
@@ -150,6 +150,11 @@ button:active {
   top: 1px;
   left: 1px;
   transition: 0.2s;
+}
+
+.buttonLink:hover,
+button:hover {
+  background-color: $buttonLinkHoverColor;
 }
 
 .keyboardLetter {
@@ -216,6 +221,7 @@ button:active {
 
 table {
   display: table;
+  font-weight: 300;
   height: 250px;
   width: 100%;
   border: 3px solid white;
@@ -241,7 +247,6 @@ table {
     text-align: center;
   }
 
-  .date,
   .score {
     text-align: right;
   }
@@ -258,7 +263,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
-  border-top: 1px solid black;
+  border-top: 3px solid $buttonLinkBorderColor;
   p {
     margin: 0;
   }

@@ -38,7 +38,14 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
             <p className='featureText'>{score}</p>
             <form className='leaderboardForm' onSubmit={addToLeaderboard}>
               <label htmlFor='leaderboardName'>Enter your name for the leaderboard:</label>
-              <input type='text' id='leaderboardName' value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+              <input
+                type='text'
+                id='leaderboardName'
+                placeholder='Name (8 chars max)'
+                maxLength='8'
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+              />
               <button type='submit'>Submit</button>
             </form>
           </div>
@@ -46,10 +53,8 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
           <div className='formConfirmation'>
             <p>Thank you! Your entry of </p>
             <p>
-              username: <span>{userInput}</span>
-            </p>{' '}
-            <p>
-              score: <span>{score}</span>
+              Name: <span>{userInput}</span> <br />
+              Score: <span>{score}</span>
             </p>{' '}
             <p> has been added to the leaderboard.</p>
           </div>

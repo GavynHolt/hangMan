@@ -239,7 +239,6 @@ html {
 body {
   background-color: #303e52;
   font-family: "Lexend", sans-serif;
-  font-weight: 300;
   color: white;
 }
 
@@ -402,8 +401,8 @@ main {
   top: 50%;
   left: 0;
   right: 0;
-  -webkit-transform: rotate(-10deg);
-          transform: rotate(-10deg);
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 .buttonLink,
@@ -414,10 +413,10 @@ button {
   margin: 20px;
   border-radius: 5px;
   font-size: 1.25rem;
-  background-color: #3d8588;
-  border: 3px solid #033d3f;
-  -webkit-box-shadow: 1px 1px #033d3f;
-          box-shadow: 1px 1px #033d3f;
+  background-color: #3f9194;
+  border: 3px solid #222c3a;
+  -webkit-box-shadow: 1px 1px #222c3a;
+          box-shadow: 1px 1px #222c3a;
 }
 
 .buttonLink:active,
@@ -430,6 +429,11 @@ button:active {
   transition: 0.2s;
 }
 
+.buttonLink:hover,
+button:hover {
+  background-color: #609696;
+}
+
 .keyboardLetter {
   margin: 5px;
 }
@@ -438,7 +442,7 @@ button:active {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background-color: rgba(36, 36, 36, 0.7);
+  background-color: #242424b3;
 }
 
 .modal {
@@ -499,6 +503,7 @@ button:active {
 
 table {
   display: table;
+  font-weight: 300;
   height: 250px;
   width: 100%;
   border: 3px solid white;
@@ -520,7 +525,6 @@ table .word {
   word-break: break-all;
   text-align: center;
 }
-table .date,
 table .score {
   text-align: right;
 }
@@ -540,7 +544,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
-  border-top: 1px solid black;
+  border-top: 3px solid #222c3a;
 }
 footer p {
   margin: 0;
