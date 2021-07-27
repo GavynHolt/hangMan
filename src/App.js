@@ -5,11 +5,13 @@ import Header from './Header';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 import Footer from './Footer';
+import './styles/App.css';
 
 function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
   const [isGameRunning, setIsGameRunning] = useState(false);
+  const [userList, setUserList] = useState([]);
 
   const startGame = async () => {
     setIsGameRunning(true);
@@ -67,8 +69,6 @@ function App() {
   }, [isGameRunning]);
 
   // Load the leaderboard database
-  const [userList, setUserList] = useState([]);
-
   useEffect(() => {
     const dbRef = firebase.database().ref();
     dbRef.on('value', (snapshot) => {
@@ -83,6 +83,8 @@ function App() {
         };
         newArray.push(userObject);
       }
+      // sort the object array by score
+      newArray.sort((a, b) => a.score < b.score);
       setUserList(newArray);
     });
   }, []);
