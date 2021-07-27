@@ -307,6 +307,7 @@ main {
 
 .hintBox {
   min-height: 4rem;
+  font-size: 1.15rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -435,7 +436,7 @@ button:active {
 
 .modal {
   position: absolute;
-  background-color: cornflowerblue;
+  background-color: #44639c;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   left: 50%;
@@ -507,11 +508,12 @@ table .score {
 }
 
 footer {
-  background: darkgray;
+  background: #3f3f3f;
   color: white;
   text-align: center;
   padding: 10px 0;
   width: 100%;
+  border-top: 1px solid black;
 }
 footer p {
   margin: 0;
@@ -520,5 +522,6 @@ footer p {
 .junoLink,
 .junoLink:visited {
   display: inline;
+  font-weight: 400;
   color: #ea593e;
 }

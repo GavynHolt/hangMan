@@ -59,6 +59,7 @@ main {
 
 .hintBox {
   min-height: 4rem;
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
 }
@@ -232,11 +233,12 @@ table {
 }
 
 footer {
-  background: darkgray;
+  background: $footerColor;
   color: white;
   text-align: center;
   padding: 10px 0;
   width: 100%;
+  border-top: 1px solid black;
   p {
     margin: 0;
   }
@@ -245,5 +247,6 @@ footer {
 .junoLink,
 .junoLink:visited {
   display: inline;
+  font-weight: 400;
   color: $junoColor;
 }

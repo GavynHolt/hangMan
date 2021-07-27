@@ -102,7 +102,8 @@ function App() {
             <div className='gameDescription'>
               <h2>A Word Guessing Game</h2>
               <p>
-                Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press start below!
+                Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press Start Game
+                below!
               </p>
               <Link className='buttonLink' to='/game' onClick={startGame}>
                 Start Game

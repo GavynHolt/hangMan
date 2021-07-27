@@ -5,7 +5,7 @@ import GameSummaryModal from './GameSummaryModal';
 const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
   const [usedLettersArray, setUsedLettersArray] = useState([]);
-  const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
+  const [emptyWordArray, setEmptyWordArray] = useState([]);
   const [turnsLeft, setTurnsLeft] = useState(6);
   const [isWinner, setIsWinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -61,6 +61,12 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       };
     };
   }, [gameWordArray.length, showHint, turnsLeft, setIsGameRunning]);
+
+  // Fixes issue where user refreshes page. Page refresh will load and display a new word.
+  useEffect(() => {
+    setEmptyWordArray(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
+  }, [gameWordArray]);
+
   // const checkKeyDown = (e) => {
   //   if (/^[a-z]$/i.test(e.key)) {
   //     checkLetter(e);
