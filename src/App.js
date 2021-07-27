@@ -10,6 +10,7 @@ function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
   const [isGameRunning, setIsGameRunning] = useState(false);
+  const [userList, setUserList] = useState([]);
 
   const startGame = async () => {
     setIsGameRunning(true);
@@ -67,8 +68,6 @@ function App() {
   }, [isGameRunning]);
 
   // Load the leaderboard database
-  const [userList, setUserList] = useState([]);
-
   useEffect(() => {
     const dbRef = firebase.database().ref();
     dbRef.on('value', (snapshot) => {

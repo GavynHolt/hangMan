@@ -7,7 +7,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
   const [turnsLeft, setTurnsLeft] = useState(6);
-  const [modalMessage, setModalMessage] = useState('');
+  const [isWinner, setIsWinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const checkLetter = (e) => {
@@ -35,12 +35,12 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
 
     setEmptyWordArray(updatedWordArray);
     if (gameWordArray.join('') === updatedWordArray.join('')) {
-      setModalMessage('You win! :)');
+      setIsWinner(true);
       setShowModal(true);
     }
 
     if (updatedTurnsLeft === 0) {
-      setModalMessage('You lose :(');
+      setIsWinner(false); //redundant?
       setShowModal(true);
     }
   };
@@ -90,7 +90,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
           );
         })}
       </div>
-      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} message={modalMessage} setShowModal={setShowModal} /> : null}
+      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} /> : null}
     </section>
   );
 };

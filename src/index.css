@@ -134,6 +134,13 @@ button:active {
   text-align: center;
 }
 
+.leaderboardForm {
+}
+
+.leaderboardForm input {
+  line-height: 1.5rem;
+}
+
 .leaderboard {
   margin: 3vw 0;
   padding: 20px;
