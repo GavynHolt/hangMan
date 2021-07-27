@@ -74,6 +74,7 @@ main {
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .wordBox {
@@ -99,7 +100,7 @@ main {
 }
 
 .usedLettersContainer {
-  min-height: 100px;
+  min-height: 70px;
   max-width: 400px;
   margin: 0 auto;
 }
@@ -135,8 +136,9 @@ button {
   position: relative;
   color: white;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   border-radius: 5px;
+  font-size: 1.25rem;
   background-color: $buttonLinkColor;
   border: 3px solid rgb(3, 61, 63);
   box-shadow: 1px 1px rgb(3, 61, 63);
@@ -150,6 +152,10 @@ button:active {
   transition: 0.2s;
 }
 
+.keyboardLetter {
+  margin: 5px;
+}
+
 .modalRoot {
   position: fixed;
   inset: 0;
@@ -158,15 +164,15 @@ button:active {
 }
 
 .modal {
-  position: absolute;
+  position: relative;
   background-color: $modalColor;
   transform: translateX(-50%);
-  left: 50%;
-  top: 20%;
-  max-width: 500px;
+  left: calc(50% - 20px);
+  top: 5vw;
+  max-width: 480px;
   margin: 20px;
   border: 1px solid black;
-  padding: 25px;
+  padding: 25px 0;
   text-align: center;
   .featureText {
     font-weight: 700;
@@ -174,8 +180,30 @@ button:active {
   }
 }
 
-.leaderboardForm input {
-  line-height: 1.5rem;
+.leaderboardForm {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  margin: 40px;
+  label {
+    text-align: center;
+  }
+  input {
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+  button {
+    margin: 10px 0;
+  }
+}
+
+.formConfirmation {
+  margin: 20px;
+  span {
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
 }
 
 .leaderboard {
@@ -189,6 +217,7 @@ button:active {
 table {
   display: table;
   height: 250px;
+  width: 100%;
   border: 3px solid white;
   border-radius: 10px;
   padding: 15px;
@@ -207,22 +236,13 @@ table {
     line-height: 2.5rem;
   }
 
-  .username {
-    min-width: 150px;
-  }
-
   .word {
-    min-width: 100px;
+    word-break: break-all;
     text-align: center;
   }
 
-  .date {
-    min-width: 100px;
-    text-align: right;
-  }
-
+  .date,
   .score {
-    min-width: 75px;
     text-align: right;
   }
 }
@@ -249,4 +269,22 @@ footer {
   display: inline;
   font-weight: 400;
   color: $junoColor;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: calc(2rem + 6vw);
+  }
+
+  h2 {
+    font-size: calc(1rem + 5vw);
+  }
+
+  .modal {
+    top: 0;
+  }
 }

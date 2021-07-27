@@ -113,7 +113,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       <div className='unusedLettersContainer'>
         {unusedLettersArray.map((letter) => {
           return (
-            <button onClick={checkLetter} key={letter}>
+            <button className='keyboardLetter' onClick={checkLetter} key={letter}>
               {letter}
             </button>
           );
