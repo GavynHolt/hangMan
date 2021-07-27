@@ -82,6 +82,8 @@ function App() {
         };
         newArray.push(userObject);
       }
+      // sort the object array by score
+      newArray.sort((a, b) => a.score < b.score);
       setUserList(newArray);
     });
   }, []);

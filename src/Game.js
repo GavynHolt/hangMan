@@ -9,6 +9,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [turnsLeft, setTurnsLeft] = useState(6);
   const [isWinner, setIsWinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [score, setScore] = useState(0);
 
   const checkLetter = (e) => {
     const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
@@ -35,6 +36,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
 
     setEmptyWordArray(updatedWordArray);
     if (gameWordArray.join('') === updatedWordArray.join('')) {
+      setScore(1000); // set to 1000 for testing
       setIsWinner(true);
       setShowModal(true);
     }
@@ -90,7 +92,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
           );
         })}
       </div>
-      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} /> : null}
+      {showModal ? <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} score={score} /> : null}
     </section>
   );
 };

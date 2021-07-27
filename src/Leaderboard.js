@@ -7,16 +7,16 @@ const Leaderboard = ({ userList }) => {
       <table>
         <thead>
           <tr>
-            <th>Username</th>
-            <th className='centered'>Score</th>
+            <th className='username'>Username</th>
+            <th className='score'>Score</th>
           </tr>
         </thead>
         <tbody>
           {userList.map((user) => {
             return (
               <tr key={user.key}>
-                <td>{user.username}</td>
-                <td className='centered'>{user.score}</td>
+                <td className='username'>{user.username}</td>
+                <td className='score'>{user.score}</td>
               </tr>
             );
           })}
