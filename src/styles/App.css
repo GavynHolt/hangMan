@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;500;700&display=swap");
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: rgb(48, 62, 82);
-  font-family: 'Lexend', sans-serif;
+  background-color: #303e52;
+  font-family: "Lexend", sans-serif;
   font-weight: 300;
   color: white;
 }
@@ -98,7 +97,7 @@ main {
 
 .strikethrough::before {
   position: absolute;
-  content: '';
+  content: "";
   border-top: 1px solid red;
   top: 50%;
   left: 0;
@@ -113,9 +112,9 @@ button {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  background-color: rgb(61, 133, 136);
-  border: 3px solid rgb(3, 61, 63);
-  box-shadow: 1px 1px rgb(3, 61, 63);
+  background-color: #3d8588;
+  border: 3px solid #033d3f;
+  box-shadow: 1px 1px #033d3f;
 }
 
 .buttonLink:active,
@@ -153,9 +152,8 @@ button:active {
   margin: 3vw 0;
   padding: 20px;
 }
-
-.leaderboard h2,
-.leaderboard p {
+.leaderboard p,
+.leaderboard h2 {
   text-align: center;
 }
 
@@ -207,4 +205,4 @@ footer {
 .junoLink,
 .junoLink:visited {
   color: #ea593e;
-}
+}/*# sourceMappingURL=App.css.map */
