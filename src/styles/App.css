@@ -452,7 +452,7 @@ button:hover {
           transform: translateX(-50%);
   left: calc(50% - 20px);
   top: 5vw;
-  max-width: 480px;
+  max-width: 600px;
   margin: 20px;
   border: 1px solid black;
   padding: 25px 0;
@@ -477,6 +477,7 @@ button:hover {
   text-align: center;
 }
 .leaderboardForm input {
+  text-align: center;
   line-height: 2.5rem;
   font-size: 1.5rem;
   margin: 10px 0;
@@ -556,7 +557,7 @@ footer {
   border-top: 3px solid #222c3a;
 }
 footer p {
-  margin: 0;
+  margin: 0.5rem;
 }
 
 .junoLink,

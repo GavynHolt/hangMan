@@ -5,17 +5,13 @@ import Header from './Header';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 import Footer from './Footer';
-import './styles/App.css';
+import './App.scss';
 
 function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [userList, setUserList] = useState([]);
-
-  const startGame = async () => {
-    setIsGameRunning(true);
-  };
 
   // If game is not running, generate a new word and word hint(definition)
   useEffect(() => {
@@ -104,7 +100,7 @@ function App() {
                 Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press Start Game
                 below!
               </p>
-              <Link className='buttonLink' to='/game' onClick={startGame}>
+              <Link className='buttonLink' to='/game'>
                 Start Game
               </Link>
               <Link className='buttonLink' to='/leaderboard'>
@@ -113,8 +109,8 @@ function App() {
             </div>
           )}
         />
-        <Route exact path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
-        <Route exact path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
+        <Route path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
+        <Route path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
       </main>
 
       <Footer />
