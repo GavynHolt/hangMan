@@ -231,6 +231,8 @@ table {
 }
 
 table {
+  table-layout: fixed;
+  width: 100%;
   th,
   td {
     vertical-align: top;
@@ -242,13 +244,19 @@ table {
     line-height: 2.5rem;
   }
 
+  .username {
+    width: 30%;
+  }
+
   .word {
     word-break: break-all;
     text-align: center;
+    width: 50%;
   }
 
   .score {
     text-align: right;
+    width: 20%;
   }
 }
 

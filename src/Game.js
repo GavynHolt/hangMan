@@ -56,7 +56,6 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
     // when component is closed via back button press, setIsGameRunning to false
     return () => {
       window.onpopstate = () => {
-        console.log('back button pressed');
         setIsGameRunning(false);
       };
     };
