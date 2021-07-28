@@ -512,6 +512,10 @@ table {
   margin: 15px 0;
 }
 
+table {
+  table-layout: fixed;
+  width: 100%;
+}
 table th,
 table td {
   vertical-align: top;
@@ -521,12 +525,17 @@ table th {
   text-decoration: underline;
   line-height: 2.5rem;
 }
+table .username {
+  width: 30%;
+}
 table .word {
   word-break: break-all;
   text-align: center;
+  width: 50%;
 }
 table .score {
   text-align: right;
+  width: 20%;
 }
 
 .pageTurnBox {

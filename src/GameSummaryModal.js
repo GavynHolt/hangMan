@@ -11,6 +11,7 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
     setShowModal(false);
   };
 
+  // Record date of high score, for now only to the server
   const todayArray = new Date().toDateString().split(' ');
   const myDate = `${todayArray[1]} ${todayArray[2]}, ${todayArray[3]}`;
 
@@ -42,7 +43,7 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
                 type='text'
                 id='leaderboardName'
                 placeholder='Name (8 chars max)'
-                maxLength='8'
+                maxLength={8}
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />
