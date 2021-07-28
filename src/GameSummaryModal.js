@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import firebase from './firebaseConfig.js';
 
-const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, word }) => {
+const GameSummaryModal = ({ setIsGameRunning, isWinner, setShowModal, score, word }) => {
   const [userInput, setUserInput] = useState('');
   const [showForm, setShowForm] = useState(true);
 
@@ -60,9 +60,17 @@ const GameSummaryModal = ({ isWinner, setShowModal, setIsGameRunning, score, wor
             <p> has been added to the leaderboard.</p>
           </div>
         ) : null}
-        <Link to='/leaderboard' className='buttonLink' onClick={handleClose}>
-          To Leaderboard
-        </Link>
+        <div className='buttonContainer'>
+          <Link className='buttonLink' to='/game' onClick={handleClose}>
+            Play Again
+          </Link>
+          <Link className='buttonLink' to='/leaderboard' onClick={handleClose}>
+            Leaderboard
+          </Link>
+          <Link className='buttonLink' to='/' onClick={handleClose}>
+            Home
+          </Link>
+        </div>
       </div>
     </div>
   );

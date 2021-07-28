@@ -3,17 +3,17 @@ import WordHint from './WordHint';
 import GameSummaryModal from './GameSummaryModal';
 
 const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
-  const [unusedLettersArray, setUnusedLettersArray] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
+  const [unusedLettersArray, setUnusedLettersArray] = useState([]);
   const [usedLettersArray, setUsedLettersArray] = useState([]);
   const [emptyWordArray, setEmptyWordArray] = useState([]);
-  const [turnsLeft, setTurnsLeft] = useState(6);
+  const [turnsLeft, setTurnsLeft] = useState(0);
   const [isWinner, setIsWinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [score, setScore] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
   const checkLetter = (e) => {
-    const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
+    const currentLetter = e.target.textContent;
     // Remove letter from unusedLettersArray
     setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
     // Check letter in charArray and return wordArray to include found letter in place of underscores
@@ -35,7 +35,9 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       setUsedLettersArray([...usedLettersArray, currentLetter]);
     }
 
+    // Update emptyWordArray with found letters version
     setEmptyWordArray(updatedWordArray);
+
     if (gameWordArray.join('') === updatedWordArray.join('')) {
       setIsWinner(true);
       setShowModal(true);
@@ -63,22 +65,12 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
 
   // Fixes issue where user refreshes page. Page refresh will load and display a new word.
   useEffect(() => {
+    setIsGameRunning(true);
+    setUsedLettersArray([]);
+    setTurnsLeft(6);
+    setUnusedLettersArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
     setEmptyWordArray(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
-  }, [gameWordArray]);
-
-  // const checkKeyDown = (e) => {
-  //   if (/^[a-z]$/i.test(e.key)) {
-  //     checkLetter(e);
-  //   }
-  //   console.log(e);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('keydown', checkKeyDown);
-  //   return () => {
-  //     window.removeEventListener('keydown', checkKeyDown);
-  //   };
-  // }, []);
+  }, [gameWordArray, setIsGameRunning]);
 
   return (
     <section className='gameContainer'>
