@@ -5,7 +5,7 @@ import Header from './Header';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 import Footer from './Footer';
-import './styles/App.css';
+import './App.scss';
 
 function App() {
   const [charArray, setCharArray] = useState([]);
