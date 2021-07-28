@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from './firebaseConfig.js';
 import Header from './Header';
+import Home from './Home';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 import Footer from './Footer';
@@ -29,7 +30,6 @@ function App() {
         fetch(randomWordUrl)
           .then((res) => res.json())
           .then((data) => {
-            console.log('gameword: ', data[0]);
             // Set word to the charArray
             setCharArray(data[0].toUpperCase().split(''));
             // Get the definition of the word
@@ -47,11 +47,9 @@ function App() {
                 }
                 // Get a random definition
                 const randomIdx = Math.floor(Math.random() * data[0].shortdef.length);
-                console.log(data[0].shortdef[randomIdx]);
                 setDefinition(data[0].shortdef[randomIdx]);
               })
               .catch((error) => {
-                console.log(error);
                 setDefinition(`${error}`);
                 // Try again with recursion if no definition is found.
                 if (count <= 3) {
@@ -90,25 +88,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Header />
       <main className='wrapper'>
-        <Route
-          exact
-          path='/'
-          render={() => (
-            <div className='gameDescription'>
-              <h2>A Word Guessing Game</h2>
-              <p>
-                Try to guess the letters in an unknown word. A hint is available for a price, and up to 6 wrong guess are allowed. To begin, press Start Game
-                below!
-              </p>
-              <Link className='buttonLink' to='/game'>
-                Start Game
-              </Link>
-              <Link className='buttonLink' to='/leaderboard'>
-                Leaderboard
-              </Link>
-            </div>
-          )}
-        />
+        <Route exact path='/' component={Home} />
         <Route path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
         <Route path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
       </main>

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import WordHint from './WordHint';
+import KeyboardLetter from './KeyboardLetter';
+import StrikethroughLetter from './StrikethroughLetter';
+import GameWordLetter from './GameWordLetter';
 import GameSummaryModal from './GameSummaryModal';
 
 const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
@@ -44,18 +47,17 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
     }
 
     if (updatedTurnsLeft === 0) {
-      setIsWinner(false); //redundant?
       setShowModal(true);
     }
   };
 
   useEffect(() => {
-    // multiply word length by turns left, minus 200 points for using word hint.
+    // Multiply word length by turns left, minus 200 points for using word hint.
     const baseScore = gameWordArray.length * turnsLeft * 100;
     const wordHintPenalty = showHint ? 200 : 0;
     setScore(baseScore - wordHintPenalty);
 
-    // when component is closed via back button press, setIsGameRunning to false
+    // When component is closed via back button press, setIsGameRunning to false
     return () => {
       window.onpopstate = () => {
         setIsGameRunning(false);
@@ -63,7 +65,7 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
     };
   }, [gameWordArray.length, showHint, turnsLeft, setIsGameRunning]);
 
-  // Fixes issue where user refreshes page. Page refresh will load and display a new word.
+  // Fixes issue where user refreshes page. Page refresh will load and display a new word, and reset all fields to default.
   useEffect(() => {
     setIsGameRunning(true);
     setUsedLettersArray([]);
@@ -84,31 +86,19 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       </div>
       <WordHint definition={definition} showHint={showHint} setShowHint={setShowHint} />
       <div className='container'>
-        {emptyWordArray.map((char, index) => {
-          return (
-            <span className='wordBox' key={index}>
-              {char}
-            </span>
-          );
-        })}
+        {emptyWordArray.map((char, index) => (
+          <GameWordLetter char={char} index={index} />
+        ))}
       </div>
       <div className='usedLettersContainer'>
-        {usedLettersArray.map((letter) => {
-          return (
-            <span className='strikethrough' key={letter}>
-              {letter}
-            </span>
-          );
-        })}
+        {usedLettersArray.map((letter) => (
+          <StrikethroughLetter letter={letter} />
+        ))}
       </div>
       <div className='unusedLettersContainer'>
-        {unusedLettersArray.map((letter) => {
-          return (
-            <button className='keyboardLetter' onClick={checkLetter} key={letter}>
-              {letter}
-            </button>
-          );
-        })}
+        {unusedLettersArray.map((letter) => (
+          <KeyboardLetter letter={letter} checkLetter={checkLetter} />
+        ))}
       </div>
       {showModal ? (
         <GameSummaryModal setIsGameRunning={setIsGameRunning} isWinner={isWinner} setShowModal={setShowModal} score={score} word={gameWordArray.join('')} />
