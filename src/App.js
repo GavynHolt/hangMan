@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import firebase from './firebaseConfig.js';
 import Header from './Header';
 import Home from './Home';
 import Game from './Game';
@@ -12,7 +11,6 @@ function App() {
   const [charArray, setCharArray] = useState([]);
   const [definition, setDefinition] = useState('');
   const [isGameRunning, setIsGameRunning] = useState(false);
-  const [userList, setUserList] = useState([]);
 
   // If game is not running, generate a new word and word hint(definition)
   useEffect(() => {
@@ -24,7 +22,7 @@ function App() {
         swear: 1,
         number: 1,
       });
-      const fetchData = (count) => {
+      const fetchData = (count = 0) => {
         // Increment count
         count++;
         fetch(randomWordUrl)
@@ -43,7 +41,7 @@ function App() {
               .then((data) => {
                 // If there is no definition for the word
                 if (data[0].shortdef === undefined) {
-                  throw new Error('No Defintion found for word.');
+                  throw new Error('No Definition found for word.');
                 }
                 // Get a random definition
                 const randomIdx = Math.floor(Math.random() * data[0].shortdef.length);
@@ -58,31 +56,9 @@ function App() {
               });
           });
       };
-      fetchData(0);
+      fetchData();
     }
   }, [isGameRunning]);
-
-  // Load the leaderboard database
-  useEffect(() => {
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', (snapshot) => {
-      const myData = snapshot.val();
-
-      const newArray = [];
-      for (let dataKey in myData) {
-        const userObject = {
-          key: dataKey,
-          username: myData[dataKey].username,
-          score: myData[dataKey].score,
-          word: myData[dataKey].word,
-        };
-        newArray.push(userObject);
-      }
-      // sort the object array by score
-      newArray.sort((a, b) => a.score < b.score);
-      setUserList(newArray);
-    });
-  }, []);
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -90,7 +66,7 @@ function App() {
       <main className='wrapper'>
         <Route exact path='/' component={Home} />
         <Route path='/game' render={() => <Game gameWordArray={charArray} setIsGameRunning={setIsGameRunning} definition={definition} />} />
-        <Route path='/leaderboard' render={() => <Leaderboard userList={userList} />} />
+        <Route path='/leaderboard' component={Leaderboard} />
       </main>
 
       <Footer />

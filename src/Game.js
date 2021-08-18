@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import WordHint from './WordHint';
 import KeyboardLetter from './KeyboardLetter';
 import StrikethroughLetter from './StrikethroughLetter';
@@ -15,41 +15,44 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
   const [score, setScore] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
-  const checkLetter = (e) => {
-    const currentLetter = e.target.textContent;
-    // Remove letter from unusedLettersArray
-    setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
-    // Check letter in charArray and return wordArray to include found letter in place of underscores
-    let letterFoundInWord = false;
-    const updatedWordArray = emptyWordArray.map((char, index) => {
-      if (gameWordArray[index] === currentLetter) {
-        letterFoundInWord = true;
-        return gameWordArray[index];
-      } else {
-        return char;
+  const checkLetter = useCallback(
+    (e) => {
+      const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
+      // Remove letter from unusedLettersArray
+      setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
+      // Check letter in charArray and return wordArray to include found letter in place of underscores
+      let letterFoundInWord = false;
+      const updatedWordArray = emptyWordArray.map((char, index) => {
+        if (gameWordArray[index] === currentLetter) {
+          letterFoundInWord = true;
+          return gameWordArray[index];
+        } else {
+          return char;
+        }
+      });
+
+      // Decrement turnsLeft if letter was incorrect
+      const updatedTurnsLeft = turnsLeft - 1;
+      if (!letterFoundInWord) {
+        setTurnsLeft(updatedTurnsLeft);
+        // Add letter to usedLettersArray
+        setUsedLettersArray([...usedLettersArray, currentLetter]);
       }
-    });
 
-    // Decrement turnsLeft if letter was incorrect
-    const updatedTurnsLeft = turnsLeft - 1;
-    if (!letterFoundInWord) {
-      setTurnsLeft(updatedTurnsLeft);
-      // Add letter to usedLettersArray
-      setUsedLettersArray([...usedLettersArray, currentLetter]);
-    }
+      // Update emptyWordArray with found letters version
+      setEmptyWordArray(updatedWordArray);
 
-    // Update emptyWordArray with found letters version
-    setEmptyWordArray(updatedWordArray);
+      if (gameWordArray.join('') === updatedWordArray.join('')) {
+        setIsWinner(true);
+        setShowModal(true);
+      }
 
-    if (gameWordArray.join('') === updatedWordArray.join('')) {
-      setIsWinner(true);
-      setShowModal(true);
-    }
-
-    if (updatedTurnsLeft === 0) {
-      setShowModal(true);
-    }
-  };
+      if (updatedTurnsLeft === 0) {
+        setShowModal(true);
+      }
+    },
+    [emptyWordArray, gameWordArray, turnsLeft, unusedLettersArray, usedLettersArray]
+  );
 
   useEffect(() => {
     // Multiply word length by turns left, minus 200 points for using word hint.
@@ -70,9 +73,28 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
     setIsGameRunning(true);
     setUsedLettersArray([]);
     setTurnsLeft(6);
+    setShowHint(false);
     setUnusedLettersArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
     setEmptyWordArray(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
   }, [gameWordArray, setIsGameRunning]);
+
+  useEffect(() => {
+    if (!showModal) {
+      const checkKeydown = (e) => {
+        const keyToCheck = e.key.toUpperCase();
+        if (unusedLettersArray.includes(keyToCheck)) {
+          console.log(e);
+          console.log(keyToCheck);
+          checkLetter(e);
+        }
+      };
+
+      document.addEventListener('keydown', checkKeydown);
+      return () => {
+        document.removeEventListener('keydown', checkKeydown);
+      };
+    }
+  }, [checkLetter, showModal, unusedLettersArray]);
 
   return (
     <section className='gameContainer'>
@@ -87,17 +109,17 @@ const Game = ({ gameWordArray, setIsGameRunning, definition }) => {
       <WordHint definition={definition} showHint={showHint} setShowHint={setShowHint} />
       <div className='container'>
         {emptyWordArray.map((char, index) => (
-          <GameWordLetter char={char} index={index} />
+          <GameWordLetter char={char} index={index} key={index} />
         ))}
       </div>
       <div className='usedLettersContainer'>
         {usedLettersArray.map((letter) => (
-          <StrikethroughLetter letter={letter} />
+          <StrikethroughLetter letter={letter} key={letter} />
         ))}
       </div>
       <div className='unusedLettersContainer'>
         {unusedLettersArray.map((letter) => (
-          <KeyboardLetter letter={letter} checkLetter={checkLetter} />
+          <KeyboardLetter letter={letter} checkLetter={checkLetter} key={letter} />
         ))}
       </div>
       {showModal ? (
