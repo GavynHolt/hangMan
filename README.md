@@ -3,6 +3,10 @@
 I hope you enjoy my version of the class game, Hang Man!
 This project was created with React, SCSS, and utilizes two REST APIs and Google's Firebase Realtime Database.
 
+### Visit Project Here
+
+https://hangmanreactgame.netlify.app/
+
 ## Get Started
 
 To start, simply press "Start Game" to load the main game page. A useEffect() call will generate a random word, and an associated word hint from the Merriam Webster Dictionary API.
