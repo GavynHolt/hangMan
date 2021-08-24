@@ -76,6 +76,10 @@ main {
   flex-wrap: wrap;
 }
 
+.loadingText {
+  font-size: 2rem;
+}
+
 .wordBox {
   display: inline-block;
   border: 1px solid black;
@@ -231,6 +235,7 @@ table {
 table {
   table-layout: fixed;
   width: 100%;
+  min-height: 350px;
   th,
   td {
     vertical-align: top;

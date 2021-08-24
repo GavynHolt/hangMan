@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import firebase from './firebaseConfig.js';
 
-const GameSummaryModal = ({ setIsGameRunning, isWinner, setShowModal, score, word }) => {
+const GameSummaryModal = ({ setIsLoaded, isWinner, setShowModal, score, word }) => {
   const [userInput, setUserInput] = useState('');
   const [showForm, setShowForm] = useState(true);
 
   const handleClose = () => {
-    setIsGameRunning(false);
+    setIsLoaded(false);
     setShowModal(false);
   };
 
