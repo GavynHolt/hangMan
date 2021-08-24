@@ -13,7 +13,7 @@ To start, simply press "Start Game" to load the main game page. A useEffect() ca
 
 To guess letters in the word, press either the on screen letters, or type the letter on your keyboard. If the letter is in the word, it will be displayed. If not, it will show up as a used letter with a red strikethrough, while both points and the number of turns left will be decremented.
 
-### TO WIN
+### To Win:
 
 Guess the word with up to 6 wrong guesses. Your score will be calculated based on the length of the word, the number of wrong guesses, and whether or not the word hint was displayed.
 
