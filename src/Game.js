@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
-import WordHint from './WordHint';
-import KeyboardLetter from './KeyboardLetter';
-import StrikethroughLetter from './StrikethroughLetter';
-import GameWordLetter from './GameWordLetter';
-import GameSummaryModal from './GameSummaryModal';
+import { React, useState, useEffect, useCallback } from "react";
+import WordHint from "./WordHint";
+import KeyboardLetter from "./KeyboardLetter";
+import StrikethroughLetter from "./StrikethroughLetter";
+import GameWordLetter from "./GameWordLetter";
+import GameSummaryModal from "./GameSummaryModal";
 
 const Game = () => {
   const [unusedLettersArray, setUnusedLettersArray] = useState([]);
@@ -15,12 +15,12 @@ const Game = () => {
   const [score, setScore] = useState(0);
   const [showHint, setShowHint] = useState(false);
   const [gameWordArray, setGameWordArray] = useState([]);
-  const [definition, setDefinition] = useState('');
+  const [definition, setDefinition] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
   const checkLetter = useCallback(
     (e) => {
-      const currentLetter = e.type === 'keydown' ? e.key.toUpperCase() : e.target.textContent;
+      const currentLetter = e.type === "keydown" ? e.key.toUpperCase() : e.target.textContent;
       // Remove letter from unusedLettersArray
       setUnusedLettersArray([...unusedLettersArray].filter((letter) => letter !== currentLetter));
       // Check letter in charArray and return wordArray to include found letter in place of underscores
@@ -45,7 +45,7 @@ const Game = () => {
       // Update emptyWordArray with found letters version
       setEmptyWordArray(updatedWordArray);
 
-      if (gameWordArray.join('') === updatedWordArray.join('')) {
+      if (gameWordArray.join("") === updatedWordArray.join("")) {
         setIsWinner(true);
         setShowModal(true);
       }
@@ -73,7 +73,7 @@ const Game = () => {
           .then((res) => res.json())
           .then((data) => {
             // Set word to the charArray
-            setGameWordArray(data[0].toUpperCase().split(''));
+            setGameWordArray(data[0].toUpperCase().split(""));
             // Get the definition of the word
             const apiKey = `27f927fa-fa4e-47c0-b6a8-a83eb72c66aa`;
             const definitionUrl = new URL(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${data[0]}`);
@@ -85,7 +85,7 @@ const Game = () => {
               .then((data) => {
                 // If there is no definition for the word
                 if (data[0].shortdef === undefined) {
-                  throw new Error('No Definition found for word.');
+                  throw new Error("No Definition found for word.");
                 }
                 // Get a random definition
                 const randomIdx = Math.floor(Math.random() * data[0].shortdef.length);
@@ -118,8 +118,8 @@ const Game = () => {
     setUsedLettersArray([]);
     setTurnsLeft(6);
     setShowHint(false);
-    setUnusedLettersArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
-    setEmptyWordArray(gameWordArray.map((char) => (char === ' ' ? ' ' : '_')));
+    setUnusedLettersArray("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""));
+    setEmptyWordArray(gameWordArray.map((char) => (char === " " ? " " : "_")));
   }, [gameWordArray, isLoaded]);
 
   useEffect(() => {
@@ -131,39 +131,49 @@ const Game = () => {
         }
       };
 
-      document.addEventListener('keydown', checkKeydown);
+      document.addEventListener("keydown", checkKeydown);
       return () => {
-        document.removeEventListener('keydown', checkKeydown);
+        document.removeEventListener("keydown", checkKeydown);
       };
     }
   }, [checkLetter, showModal, unusedLettersArray]);
 
   return (
-    <section className='gameContainer'>
-      <div className='dashboard'>
+    <section className="gameContainer">
+      <div className="dashboard">
         <div>
           <p>Tries Left: {turnsLeft}</p>
         </div>
         <div>
-          <p>Score: {isLoaded ? score : 'Loading...'}</p>
+          <p>Score: {isLoaded ? score : "Loading..."}</p>
         </div>
       </div>
       <WordHint definition={definition} showHint={showHint} setShowHint={setShowHint} />
-      <div className='container'>
-        {!isLoaded ? <p className='loadingText'>Loading...</p> : emptyWordArray.map((char, index) => <GameWordLetter char={char} index={index} key={index} />)}
+      <div className="container">
+        {!isLoaded ? (
+          <p className="loadingText">Loading...</p>
+        ) : (
+          emptyWordArray.map((char, index) => <GameWordLetter char={char} index={index} key={index} />)
+        )}
       </div>
-      <div className='usedLettersContainer'>
+      <div className="usedLettersContainer">
         {usedLettersArray.map((letter) => (
           <StrikethroughLetter letter={letter} key={letter} />
         ))}
       </div>
-      <div className='unusedLettersContainer'>
+      <div className="unusedLettersContainer">
         {unusedLettersArray.map((letter) => (
           <KeyboardLetter letter={letter} checkLetter={checkLetter} key={letter} />
         ))}
       </div>
       {showModal ? (
-        <GameSummaryModal setIsLoaded={setIsLoaded} isWinner={isWinner} setShowModal={setShowModal} score={score} word={gameWordArray.join('')} />
+        <GameSummaryModal
+          setIsLoaded={setIsLoaded}
+          isWinner={isWinner}
+          setShowModal={setShowModal}
+          score={score}
+          word={gameWordArray.join("")}
+        />
       ) : null}
     </section>
   );

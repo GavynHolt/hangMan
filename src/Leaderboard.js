@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faHome } from '@fortawesome/free-solid-svg-icons';
-import firebase from './firebaseConfig.js';
+import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faHome } from "@fortawesome/free-solid-svg-icons";
+import firebase from "./firebaseConfig.js";
 
 const Leaderboard = () => {
   const [indexOffset, setIndexOffset] = useState(0);
@@ -19,7 +19,7 @@ const Leaderboard = () => {
   // Load the leaderboard database
   useEffect(() => {
     const dbRef = firebase.database().ref();
-    dbRef.on('value', (snapshot) => {
+    dbRef.on("value", (snapshot) => {
       const myData = snapshot.val();
 
       const newArray = [];
@@ -39,44 +39,44 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className='leaderboard'>
+    <div className="leaderboard">
       <h2>Leaderboard</h2>
       {userList.length === 0 ? <p>Loading...</p> : <p>{userList.length} Entries</p>}
       <table>
         <thead>
           <tr>
-            <th className='username'>Username</th>
-            <th className='word'>Word</th>
-            <th className='score'>Score</th>
+            <th className="username">Username</th>
+            <th className="word">Word</th>
+            <th className="score">Score</th>
           </tr>
         </thead>
         <tbody>
           {userList.slice(indexOffset, indexOffset + 10).map((user, index) => {
             return (
               <tr key={user.key}>
-                <td className='username'>
+                <td className="username">
                   {indexOffset + index + 1}. {user.username}
                 </td>
-                <td className='word'>{user.word}</td>
-                <td className='score'>{user.score}</td>
+                <td className="word">{user.word}</td>
+                <td className="score">{user.score}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <div className='pageTurnBox'>
+      <div className="pageTurnBox">
         <button onClick={() => changeLeaderboardPage(-10)}>
-          <span className='sr-only'>Previous Page</span>
-          <FontAwesomeIcon icon={faArrowLeft} aria-hidden='true' />
+          <span className="sr-only">Previous Page</span>
+          <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" />
         </button>
         <button onClick={() => changeLeaderboardPage(10)}>
-          <span className='sr-only'>Next Page</span>
-          <FontAwesomeIcon icon={faArrowRight} aria-hidden='true' />
+          <span className="sr-only">Next Page</span>
+          <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
         </button>
       </div>
-      <Link className='buttonLink' to='/'>
-        <span className='sr-only'>Go Back Home</span>
-        <FontAwesomeIcon icon={faArrowLeft} aria-hidden='true' /> <FontAwesomeIcon icon={faHome} aria-hidden='true' />
+      <Link className="buttonLink" to="/">
+        <span className="sr-only">Go Back Home</span>
+        <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" /> <FontAwesomeIcon icon={faHome} aria-hidden="true" />
       </Link>
     </div>
   );

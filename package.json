@@ -40,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.27.1",
+    "prettier": "2.5.1",
+    "prettier-eslint": "^13.0.0"
   }
 }
