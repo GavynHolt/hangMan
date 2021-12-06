@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import WordHint from "./WordHint";
 import KeyboardLetter from "./KeyboardLetter";
 import StrikethroughLetter from "./StrikethroughLetter";

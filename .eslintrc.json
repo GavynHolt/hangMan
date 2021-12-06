@@ -1,5 +1,6 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "es2021": true
   },
@@ -8,7 +9,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2016,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "plugins": ["react"],
