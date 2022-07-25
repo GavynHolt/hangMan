@@ -63,7 +63,6 @@ const Game = () => {
       // Get a random word from random-word-api
       const randomWordUrl = new URL(`https://random-word-api.herokuapp.com/word`);
       randomWordUrl.search = new URLSearchParams({
-        swear: 1,
         number: 1,
       });
       const fetchData = (count = 0) => {
