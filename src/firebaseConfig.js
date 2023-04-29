@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBr0naBYY_ZqQmlc4u7ezvGasLlUNKaAYE",
+  apiKey: API_KEY,
   authDomain: "hangman-3fd19.firebaseapp.com",
   projectId: "hangman-3fd19",
   storageBucket: "hangman-3fd19.appspot.com",
